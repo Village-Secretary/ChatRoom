@@ -35,7 +35,7 @@
 2. HTML
 3. CSS
 4. 服务器和客户端相关知识
-5. HTTP等网络相关
+5. HTTP，Socket等网络相关
 6. UI设计
 7. Github基本操作及多人协同开发相关知识
 8. MySql数据库
@@ -54,6 +54,7 @@ https://fiora.suisuijiang.com/
 **文档：**  
 - [JavaScript][1][现代 JavaScript 教程](https://zh.javascript.info/)
 - [服务器搭建和项目部署][2][把Node.js项目部署到阿里云服务器（CentOs）](https://segmentfault.com/a/1190000004051670)
+- [聊天室入门教程][1][从0开始用Nodejs做一个聊天室](https://www.jianshu.com/p/b608a765519a)
 
 **视频：**  
 - [JavaScript][2][快速入门NodeJS之【搭建Web服务器】](https://www.bilibili.com/video/BV1KX4y1K7uz?spm_id_from=333.999.0.0)
