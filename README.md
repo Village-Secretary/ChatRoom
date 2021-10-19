@@ -7,7 +7,6 @@
 该项目的核心功能为让用户使用浏览器访问主界面进行多用户实时通讯。
 
 ---
----
 
 ## **多人聊天室项目具体功能**：
 
@@ -20,7 +19,6 @@
 - 表情包
 
 ---
----
 
 **前端语言**：JavaScript, HTML, CSS  
 **后端语言**：JavaScript(node.js)  
@@ -29,7 +27,6 @@
 **数据库**：MySql  
 **数据传输**：Json数据格式
 
----
 ---
 
 ## **需要了解的东西有**：
@@ -45,12 +42,10 @@
 10. 云服务器搭建及项目部署
 
 ---
----
 
 ## **项目参考案例**：
 https://fiora.suisuijiang.com/
 
----
 ---
 
 ## **开发相关知识文档及视频**：
@@ -66,7 +61,6 @@ https://fiora.suisuijiang.com/
 - [Github][2][40 分钟学会 Git | 日常开发全程大放送&搭配Github](https://www.bilibili.com/video/BV1db4y1d79C?spm_id_from=333.999.0.0)
 - [服务器搭建和项目部署][1][在家没事干？10分钟拥有真正意义上属于自己的网站！网站搭建！](https://www.bilibili.com/video/BV1D7411B7Yf/?spm_id_from=333.788.recommend_more_video.-1)
 
----
 ---
 
 ## **多人聊天室功能模块分析及任务分工：**
@@ -107,7 +101,7 @@ https://fiora.suisuijiang.com/
 - [ ] ...
 
 ---
----
+
 ## **模块设计**
 
 ### **数据结构设计：**
@@ -122,7 +116,7 @@ https://fiora.suisuijiang.com/
 | email | 邮箱 | 字符串 |
 | avatar | 头像 | 字符串 | 存储图片路径 |
 | self_introduction | 个人介绍 | 字符串 | 
-|
+
 
 - **聊天信息[ChatMessage]**
 
@@ -133,7 +127,7 @@ https://fiora.suisuijiang.com/
 | type | 信息类型 | 枚举 | 用来标注聊天信息类型，如：私聊、群聊等
 | message | 信息 | 字符串 | 存储聊天内容或是存储图片、文件路径 |
 | send_time | 发送时间 | 整数 | 
-|
+
 
 - **请求信息[RequestInformation]**
 
@@ -143,7 +137,7 @@ https://fiora.suisuijiang.com/
 | recv_id | 接受账号 | 字符串 |
 | type | 类型 | 枚举 |
 | message | 请求附带信息 | 字符串 |
-|
+
 
 ### **数据库建表：**
 
