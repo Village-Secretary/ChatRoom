@@ -197,7 +197,7 @@ create table if not exists ChatMessage (
 	recv_id char(12) not null,
 	type int(3) not null,
 	message varchar(600) not null,
-    send_time datetime not null,
+    	send_time datetime not null,
 
 	foreign key (send_id) references UserInfo(id), 
 	foreign key (recv_id) references UserInfo(id)
@@ -212,7 +212,7 @@ create table if not exists RequestInformation (
 	recv_id char(12) not null,
 	type int(3) not null,
 	message varchar(600) not null,
-    send_time datetime not null,
+    	send_time datetime not null,
 
 	foreign key (send_id) references UserInfo(id), 
 	foreign key (recv_id) references UserInfo(id)
