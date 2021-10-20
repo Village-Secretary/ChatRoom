@@ -108,36 +108,36 @@ https://fiora.suisuijiang.com/
 
 - **用户信息[UserInfo]**
 
-|   字段   |   含义   |   类型   |   备注   |  
-|----------|----------|---------|----------|
-| id | 账户 | 字符串 |
-| password | 密码 | 字符串 |
-| name | 昵称 | 字符串 |
-| email | 邮箱 | 字符串 |
-| avatar | 头像 | 字符串 | 存储图片路径 |
-| self_introduction | 个人介绍 | 字符串 | 
+|   字段   |   含义   |   类型   |   备注   |   限制   |  
+|----------|----------|---------|----------|----------|
+| id | 账户 | 字符串 || 12
+| password | 密码 | 字符串 || 16
+| name | 昵称 | 字符串 || 30
+| email | 邮箱 | 字符串 || 254
+| avatar | 头像 | 字符串 | 存储图片路径 | 255
+| self_introduction | 个人介绍 | 字符串 || 60
 
 
 - **聊天信息[ChatMessage]**
 
-|   字段   |   含义   |   类型   |   备注   |  
-|----------|----------|---------|----------|
-| send_id | 发送账号 | 字符串 |
-| recv_id | 接受账号 | 字符串 |
-| type | 信息类型 | 枚举 | 用来标注聊天信息类型，如：私聊、群聊等
-| message | 信息 | 字符串 | 存储聊天内容或是存储图片、文件路径 |
-| send_time | 发送时间 | 整数 | 
+|   字段   |   含义   |   类型   |   备注   |   限制   |    
+|----------|----------|---------|----------|----------|
+| send_id | 发送账号 | 字符串 || 12
+| recv_id | 接受账号 | 字符串 || 12
+| type | 信息类型 | 枚举 | 标注聊天信息类型，如：私聊、群聊等| 无
+| message | 信息 | 字符串 | 存储聊天内容或是存储图片、文件路径 | 600
+| send_time | 发送时间 | 整数 || 14
 
 
 - **请求信息[RequestInformation]**
 
-|   字段   |   含义   |   类型   |   备注   |  
-|----------|----------|---------|----------|
-| send_id | 发送账号 | 字符串 |
-| recv_id | 接受账号 | 字符串 |
-| type | 类型 | 枚举 |
-| message | 请求附带信息 | 字符串 |
-
+|   字段   |   含义   |   类型   |   备注   |   限制   |  
+|----------|----------|---------|----------|----------|  
+| send_id | 发送账号 | 字符串 || 12
+| recv_id | 接受账号 | 字符串 || 12
+| type | 类型 | 枚举 | 标注请求类型，如：好友请求，群请求|无
+| message | 请求附带信息 | 字符串 ||255
+| send_time | 发送时间 | 整数 || 14
 
 ### **数据库建表：**
 
@@ -152,7 +152,7 @@ https://fiora.suisuijiang.com/
 候选码: (chat_id)  
 
 >RequestInformation(request_id, send_id, recv_id, type, message)  
-关系依赖:  { request_id -> send_id, request_id -> recv_id, request_id -> type, request_id -> message }  
+关系依赖:  { request_id -> send_id, request_id -> recv_id, request_id -> type, request_id -> message, request_id -> send_time }  
 候选码: (request_id)
 
 - **范式：**
@@ -161,6 +161,62 @@ https://fiora.suisuijiang.com/
 - [x] 符合第三范式
 - [x] 符合第BC范式
 
+- **关系表：**
 
+> UserInfo(id, password, name, email, avatar, self_introduction)  
+主键: (id)
+外键: 无
+
+> ChatMessage(chat_id, send_id, recv_id, type, message, send_time)   
+主键: (chat_id)  
+外键: (send_id)参考UserInfo的(id), (recv_id)参考UserInfo的(id)
+
+> RequestInformation(request_id, send_id, recv_id, type, message)   
+主键: (request_id)  
+外键: (send_id)参考UserInfo的(id), (recv_id)参考UserInfo的(id)
+
+- **建表：**
+
+UserInfo
+```
+create table if not exists UserInfo (
+	id char(12) primary key,
+	password char(16) not null,
+	name char(30),
+	email char(254) unique not null,
+	avatar char(255),
+	self_introduction char(60)
+)engine=innodb default charset=utf8;
+```
+
+ChatMessage
+```
+create table if not exists ChatMessage (
+	chat_id int(10) unsigned primary key auto_increment,
+	send_id char(12) not null,
+	recv_id char(12) not null,
+	type int(3) not null,
+	message varchar(600) not null,
+  send_time datetime not null,
+
+	foreign key (send_id) references UserInfo(id), 
+	foreign key (recv_id) references UserInfo(id)
+)engine=innodb default charset=utf8;
+```
+
+RequestInformation
+```
+create table if not exists RequestInformation (
+	request_id int(10) unsigned primary key auto_increment,
+	send_id char(12) not null,
+	recv_id char(12) not null,
+	type int(3) not null,
+	message varchar(600) not null,
+  send_time datetime not null,
+
+	foreign key (send_id) references UserInfo(id), 
+	foreign key (recv_id) references UserInfo(id)
+)engine=innodb default charset=utf8;
+```
 
 </font>
