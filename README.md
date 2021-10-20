@@ -151,7 +151,7 @@ https://fiora.suisuijiang.com/
 关系依赖:  { chat_id -> send_id, chat_id -> recv_id, chat_id -> type,chat_id -> message, chat_id -> send_time }  
 候选码: (chat_id)  
 
->RequestInformation(request_id, send_id, recv_id, type, message)  
+>RequestInformation(request_id, send_id, recv_id, type, message, send_time)  
 关系依赖:  { request_id -> send_id, request_id -> recv_id, request_id -> type, request_id -> message, request_id -> send_time }  
 候选码: (request_id)
 
@@ -171,7 +171,7 @@ https://fiora.suisuijiang.com/
 主键: (chat_id)  
 外键: (send_id)参考UserInfo的(id), (recv_id)参考UserInfo的(id)
 
-> RequestInformation(request_id, send_id, recv_id, type, message)   
+> RequestInformation(request_id, send_id, recv_id, type, message, send_time)   
 主键: (request_id)  
 外键: (send_id)参考UserInfo的(id), (recv_id)参考UserInfo的(id)
 
@@ -197,7 +197,7 @@ create table if not exists ChatMessage (
 	recv_id char(12) not null,
 	type int(3) not null,
 	message varchar(600) not null,
-  send_time datetime not null,
+    send_time datetime not null,
 
 	foreign key (send_id) references UserInfo(id), 
 	foreign key (recv_id) references UserInfo(id)
@@ -212,7 +212,7 @@ create table if not exists RequestInformation (
 	recv_id char(12) not null,
 	type int(3) not null,
 	message varchar(600) not null,
-  send_time datetime not null,
+    send_time datetime not null,
 
 	foreign key (send_id) references UserInfo(id), 
 	foreign key (recv_id) references UserInfo(id)
